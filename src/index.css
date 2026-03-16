@@ -1,0 +1,341 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* ================= BRAND COLORS ================= */
+    --primary: 201 100% 50%;           /* #0080FF - MAIN BLUE */
+    --primary-hover: 210 100% 45%;      
+    --primary-active: 210 100% 40%;     
+    --primary-foreground: 0 0% 100%;    /* WHITE text on blue backgrounds */
+
+    /* ================= BACKGROUNDS ================= */
+    --background: 0 0% 100%;            /* WHITE background */
+    --foreground: 0 0% 15%;             /* DARK TEXT for body/paragraphs (NOT BLUE!) */
+
+    --card: 0 0% 100%;                  
+    --card-foreground: 0 0% 15%;        /* DARK text in cards (NOT BLUE!) */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;     /* DARK text (NOT BLUE!) */
+
+    /* ================= NEUTRALS ================= */
+    --secondary: 210 100% 97%;          
+    --secondary-foreground: 0 0% 15%;   /* DARK text (NOT BLUE!) */
+
+    --muted: 210 40% 96%;               
+    --muted-foreground: 0 0% 45%;       /* GRAY for less important text (NOT BLUE!) */
+
+    --border: 210 80% 90%;              /* Light blue borders */
+    --input: 210 80% 90%;               
+
+    /* ================= ACCENT ================= */
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    /* ================= STATES ================= */
+    --ring: 210 100% 50%;               
+    --destructive: 0 84% 60%;           
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .course-card {
+    @apply relative overflow-hidden rounded-lg 
+           border-2 shadow-sm transition-all duration-300
+           hover:shadow-lg;
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .course-card:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+  }
+
+  /* BLUE BUTTONS with WHITE TEXT */
+  .btn-primary,
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-lg
+           px-6 py-3 text-sm font-medium
+           transition-all duration-200
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border: 2px solid hsl(var(--primary));
+  }
+
+  .btn-primary:hover,
+  .btn-accent:hover {
+    background-color: hsl(var(--primary-hover));
+    border-color: hsl(var(--primary-hover));
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -6px hsl(var(--primary) / 0.4);
+  }
+
+  .btn-primary:active,
+  .btn-accent:active {
+    background-color: hsl(var(--primary-active));
+    transform: translateY(0);
+  }
+
+  .btn-primary *,
+  .btn-accent * {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* OUTLINE BUTTONS - blue text on white, flips on hover */
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-lg
+           px-6 py-3 text-sm font-medium
+           transition-all duration-200
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    
+    background-color: hsl(var(--background));
+    color: hsl(var(--primary));
+    border: 2px solid hsl(var(--primary));
+  }
+
+  .btn-outline:hover {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .btn-outline:hover * {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* HEADINGS are BLUE */
+  .section-title {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl;
+    color: hsl(var(--primary));
+  }
+
+  /* Subtitles are GRAY */
+  .section-subtitle {
+    @apply mt-4 text-lg max-w-3xl mx-auto;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Use for blue accent text */
+  .text-primary {
+    color: hsl(var(--primary)) !important;
+  }
+
+  .text-muted {
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* BLUE backgrounds get WHITE text */
+  .bg-primary {
+    background-color: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  .bg-primary * {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* WHITE backgrounds get DARK text */
+  .bg-white {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .border-primary {
+    border-color: hsl(var(--primary)) !important;
+  }
+
+  .hover\:bg-primary:hover {
+    background-color: hsl(var(--primary-hover)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  .hover\:text-primary:hover {
+    color: hsl(var(--primary)) !important;
+  }
+
+  .focus\:ring-primary:focus-visible {
+    --tw-ring-color: hsl(var(--primary));
+  }
+
+  .focus\:border-primary:focus-visible {
+    border-color: hsl(var(--primary)) !important;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  /* BLUE GRADIENT with WHITE text */
+  .bg-gradient-primary {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-active)) 100%
+    );
+    color: hsl(var(--primary-foreground));
+  }
+
+  .bg-gradient-primary * {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* LIGHT GRADIENT with DARK text */
+  .bg-gradient-primary-light {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.05) 0%,
+      hsl(var(--primary) / 0.15) 100%
+    );
+    color: hsl(var(--foreground));
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-active)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-primary-soft {
+    box-shadow: 0 6px 20px -6px hsl(var(--primary) / 0.25);
+  }
+
+  .shadow-primary-strong {
+    box-shadow: 0 10px 40px -10px hsl(var(--primary) / 0.4);
+  }
+
+  .transition-smooth {
+    transition: all 0.25s ease-out;
+  }
+
+  @keyframes scale-in {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.25s ease-out both;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .bg-accent {
+    background-color: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  .bg-accent * {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  .text-accent {
+    color: hsl(var(--primary)) !important;
+  }
+
+  .ring-accent {
+    --tw-ring-color: hsl(var(--primary)) !important;
+  }
+
+  /* INPUTS: white bg, blue border, DARK text */
+  input,
+  textarea,
+  select {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--input));
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: hsl(var(--primary));
+    outline: none;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+}
+
+/* BLUE SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+  border: 2px solid hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary-hover));
+}
+
+/* BLUE SELECTION with WHITE text */
+::selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+::-moz-selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
